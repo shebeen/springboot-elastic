@@ -12,8 +12,7 @@ public class ElasticConfiguration {
 	public RestHighLevelClient restHighLevelClient() {
 		try {
 			RestHighLevelClient client = new RestHighLevelClient(
-			        RestClient.builder(
-			                new HttpHost("localhost", 9200, "http")));
+					RestClient.builder(new HttpHost("localhost", 9200, "http")));
 			return client;
 		} catch (Exception e) {
 			e.printStackTrace();
