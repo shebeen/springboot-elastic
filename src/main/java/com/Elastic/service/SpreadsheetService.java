@@ -25,9 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class SpreadsheetService {
 	public InputStream multipartToInputStream(MultipartFile file) throws IOException {
 		byte[] bytes = file.getBytes();
-		Path path = Paths.get("/home/shebeen/Documents/" + file.getOriginalFilename());
+		Path path = Paths.get(file.getOriginalFilename());
 		Files.write(path, bytes);
-		File spreadSheet = new File("/home/shebeen/Documents/" + file.getOriginalFilename());
+		File spreadSheet = new File(file.getOriginalFilename());
 		return new FileInputStream(spreadSheet);
 	}
 
