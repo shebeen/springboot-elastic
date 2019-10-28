@@ -11,6 +11,7 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +20,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ElsService {
 	@Autowired
 	RestHighLevelClient restHighLevelClient;
+	
+	@Value("${elastic.host}")
+	String host;
+	
+	@Value("${elastic.port}")
+	int port;
 
 	public void publishToElastic(Map<String, List<Object>> userCallsMap) throws IOException {
 		if (!userCallsMap.isEmpty()) {
@@ -27,7 +34,7 @@ public class ElsService {
 				ObjectMapper mapper = new ObjectMapper();
 				String json = mapper.writeValueAsString(entry.getValue());
 				restHighLevelClient = new RestHighLevelClient(
-						RestClient.builder(new HttpHost("192.168.0.11", 9200, "http")));
+						RestClient.builder(new HttpHost("localhost", 9200, "http")));
 				String jsonString = "{\"user\":\"" + entry.getKey() + "\",\"callist\":" + json + "}";
 				System.out.print(jsonString);
 				IndexRequest request = new IndexRequest("" + entry.getKey());
