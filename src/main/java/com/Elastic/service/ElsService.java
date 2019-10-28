@@ -27,7 +27,7 @@ public class ElsService {
 				ObjectMapper mapper = new ObjectMapper();
 				String json = mapper.writeValueAsString(entry.getValue());
 				restHighLevelClient = new RestHighLevelClient(
-						RestClient.builder(new HttpHost("localhost", 9200, "http")));
+						RestClient.builder(new HttpHost("192.168.0.11", 9200, "http")));
 				String jsonString = "{\"user\":\"" + entry.getKey() + "\",\"callist\":" + json + "}";
 				System.out.print(jsonString);
 				IndexRequest request = new IndexRequest("" + entry.getKey());
