@@ -33,8 +33,8 @@ public class ElsService {
 			for (Map.Entry<String, List<Object>> entry : userCallsMap.entrySet()) {
 				ObjectMapper mapper = new ObjectMapper();
 				String json = mapper.writeValueAsString(entry.getValue());
-				restHighLevelClient = new RestHighLevelClient(
-						RestClient.builder(new HttpHost("localhost", 9200, "http")));
+//				restHighLevelClient = new RestHighLevelClient(
+//						RestClient.builder(new HttpHost("localhost", 9200, "http")));
 				String jsonString = "{\"user\":\"" + entry.getKey() + "\",\"callist\":" + json + "}";
 				System.out.print(jsonString);
 				IndexRequest request = new IndexRequest("" + entry.getKey());
