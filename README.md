@@ -1,2 +1,2 @@
 # springboot-elastic
-Elastic search with springboot applications
+Elastic search with springboot application
